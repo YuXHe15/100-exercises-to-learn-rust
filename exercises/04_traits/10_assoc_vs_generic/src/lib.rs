@@ -13,6 +13,40 @@
 // You don't have to though: it's perfectly okay to write three separate
 // implementations manually. Venture further only if you're curious.
 
+trait Power<T> {
+    type Output;
+    fn power(self, n: T) -> Self::Output;
+}
+
+// 对 u32 类型的实现，接受 u32 作为指数
+impl Power<u32> for u32 {
+    type Output = u32;
+
+    fn power(self, n: u32) -> u32 {
+        self.pow(n)
+    }
+}
+
+// 对 u16 类型的实现，接受 u16 作为指数
+impl Power<u16> for u32 {
+    type Output = u32;
+
+    fn power(self, n: u16) -> u32 {
+        self.pow(n as u32)
+    }
+}
+
+// 对 &u32 类型的实现，接受 &u32 作为指数
+impl Power<&u32> for u32 {
+    type Output = u32;
+
+    fn power(self, n: &u32) -> u32 {
+        self.pow(*n)
+    }
+}
+
+
+
 #[cfg(test)]
 mod tests {
     use super::Power;
