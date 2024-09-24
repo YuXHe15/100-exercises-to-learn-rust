@@ -13,7 +13,7 @@
 // You don't have to though: it's perfectly okay to write three separate
 // implementations manually. Venture further only if you're curious.
 
-trait Power<T> {
+pub trait Power<T> {
     type Output;
     fn power(self, n: T) -> Self::Output;
 }
