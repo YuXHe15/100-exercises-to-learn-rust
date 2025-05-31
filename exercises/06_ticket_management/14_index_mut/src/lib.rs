@@ -2,6 +2,7 @@
 
 use std::ops::Index;
 use ticket_fields::{TicketDescription, TicketTitle};
+use std::ops::IndexMut;
 
 #[derive(Clone)]
 pub struct TicketStore {
@@ -72,6 +73,18 @@ impl Index<&TicketId> for TicketStore {
 
     fn index(&self, index: &TicketId) -> &Self::Output {
         &self[*index]
+    }
+}
+
+impl IndexMut<&TicketId> for TicketStore {
+    fn index_mut(&mut self, index: &TicketId) -> &mut Self::Output {
+        self.tickets.iter_mut().find(|x| x.id == *index).unwrap()
+    }
+}
+
+impl IndexMut<TicketId> for TicketStore {
+    fn index_mut(&mut self, index: TicketId) -> &mut Self::Output {
+        self.tickets.iter_mut().find(|x| x.id == index).unwrap()
     }
 }
 
