@@ -23,6 +23,20 @@ pub struct TicketPatch {
     pub status: Option<Status>,
 }
 
+impl TicketPatch {
+    pub fn apply_to(self, ticket: &mut Ticket) {
+        if let Some(title) = self.title {
+            ticket.title = title;
+        }
+        if let Some(description) = self.description {
+            ticket.description = description;
+        }
+        if let Some(status) = self.status {
+            ticket.status = status;
+        }
+    }
+}
+
 #[derive(Clone, Debug, Copy, PartialEq, Eq)]
 pub enum Status {
     ToDo,
